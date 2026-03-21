@@ -2,7 +2,7 @@
 name: lifemanager-projects
 description: Proactively keep LifeManager project descriptions up to date as development progresses. Triggers when working on a project that is tracked in LifeManager — updates descriptions with recent changes, new features, and current state.
 user-invocable: false
-allowed-tools: mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__search_projects, mcp__claude_ai_LifeManager__update_project, mcp__claude_ai_LifeManager__create_project
+allowed-tools: mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__search_projects, mcp__claude_ai_LifeManager__update_project, mcp__claude_ai_LifeManager__create_project, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_thoughts
 ---
 
 # LifeManager Projects Integration

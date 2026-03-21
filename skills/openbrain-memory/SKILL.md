@@ -2,7 +2,7 @@
 name: openbrain-memory
 description: Proactively use OpenBrain to save and recall thoughts during conversations. Triggers when the user shares insights, makes decisions, learns something new, or works on topics that might have prior context in OpenBrain.
 user-invocable: false
-allowed-tools: mcp__claude_ai_OpenBrain__save_thought, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_thoughts, mcp__claude_ai_OpenBrain__link_thoughts, mcp__claude_ai_OpenBrain__list_tags
+allowed-tools: mcp__claude_ai_OpenBrain__save_thought, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_thoughts, mcp__claude_ai_OpenBrain__link_thoughts, mcp__claude_ai_OpenBrain__list_tags, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__search_projects
 ---
 
 # OpenBrain Integration
