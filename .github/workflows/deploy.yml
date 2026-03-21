@@ -28,3 +28,10 @@ jobs:
             ~/llm-skills/llm-skills install --global lifemanager-projects
             ~/llm-skills/llm-skills install --global workflow
             ~/llm-skills/llm-skills install --global git-gh
+            ~/llm-skills/llm-skills install --global nightly-sync
+
+            # Set up nightly-sync service
+            sudo cp ~/llm-skills/scripts/nightly-sync.service /etc/systemd/system/nightly-sync.service
+            sudo systemctl daemon-reload
+            sudo systemctl enable nightly-sync
+            sudo systemctl restart nightly-sync
