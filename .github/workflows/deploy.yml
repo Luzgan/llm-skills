@@ -18,5 +18,9 @@ jobs:
           username: ${{ secrets.OPENBRAIN_EC2_USERNAME }}
           key: ${{ secrets.OPENBRAIN_EC2_SSH_KEY }}
           script: |
-            cd ~/llm-skills
-            git pull origin main
+            if [ ! -d ~/llm-skills ]; then
+              git clone https://github.com/Luzgan/llm-skills.git ~/llm-skills
+            else
+              cd ~/llm-skills
+              git pull origin main
+            fi
