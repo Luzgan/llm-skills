@@ -26,3 +26,4 @@ jobs:
             fi
             ~/llm-skills/llm-skills install --global openbrain-memory
             ~/llm-skills/llm-skills install --global lifemanager-projects
+            ~/llm-skills/llm-skills install --global workflow
