@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SKILLS_DIR="$(cd "$(dirname "$0")" && pwd)/skills"
+GLOBAL_SKILLS_DIR="$HOME/.claude/skills"
+
+usage() {
+    cat <<EOF
+Usage: llm-skills <command> [options] [skill]
+
+Commands:
+  list                     List available skills
+  install [--global] SKILL Install a skill (symlink into project or global)
+  uninstall [--global] SKILL Remove installed skill
+
+Options:
+  --global    Target ~/.claude/skills/ instead of .claude/skills/ in current project
+EOF
+    exit 1
+}
+
+list_skills() {
+    echo "Available skills:"
+    for dir in "$SKILLS_DIR"/*/; do
+        [ -d "$dir" ] || continue
+        name=$(basename "$dir")
+        desc=$(sed -n 's/^description: *//p' "$dir/SKILL.md" 2>/dev/null | head -1)
+        printf "  %-25s %s\n" "$name" "$desc"
+    done
+}
+
+install_skill() {
+    local global=false
+    if [[ "${1:-}" == "--global" ]]; then
+        global=true
+        shift
+    fi
+
+    local skill="${1:-}"
+    [[ -z "$skill" ]] && { echo "Error: skill name required"; usage; }
+
+    local source="$SKILLS_DIR/$skill"
+    [[ -d "$source" ]] || { echo "Error: skill '$skill' not found in $SKILLS_DIR"; exit 1; }
+
+    local target_dir
+    if $global; then
+        target_dir="$GLOBAL_SKILLS_DIR"
+    else
+        target_dir="$(pwd)/.claude/skills"
+    fi
+
+    mkdir -p "$target_dir"
+    local target="$target_dir/$skill"
+
+    if [[ -e "$target" ]]; then
+        if [[ -L "$target" ]]; then
+            echo "Skill '$skill' already installed at $target (symlink to $(readlink "$target"))"
+            return 0
+        else
+            echo "Error: $target already exists and is not a symlink"
+            exit 1
+        fi
+    fi
+
+    ln -s "$source" "$target"
+    local scope="project"
+    $global && scope="global"
+    echo "Installed '$skill' ($scope) -> $target"
+}
+
+uninstall_skill() {
+    local global=false
+    if [[ "${1:-}" == "--global" ]]; then
+        global=true
+        shift
+    fi
+
+    local skill="${1:-}"
+    [[ -z "$skill" ]] && { echo "Error: skill name required"; usage; }
+
+    local target_dir
+    if $global; then
+        target_dir="$GLOBAL_SKILLS_DIR"
+    else
+        target_dir="$(pwd)/.claude/skills"
+    fi
+
+    local target="$target_dir/$skill"
+
+    if [[ ! -e "$target" && ! -L "$target" ]]; then
+        echo "Error: skill '$skill' is not installed"
+        exit 1
+    fi
+
+    if [[ -L "$target" ]]; then
+        rm "$target"
+        echo "Uninstalled '$skill' from $target"
+    else
+        echo "Error: $target is not a symlink — refusing to remove (manually created?)"
+        exit 1
+    fi
+}
+
+[[ $# -eq 0 ]] && usage
+
+case "$1" in
+    list)
+        list_skills
+        ;;
+    install)
+        shift
+        install_skill "$@"
+        ;;
+    uninstall)
+        shift
+        uninstall_skill "$@"
+        ;;
+    *)
+        echo "Unknown command: $1"
+        usage
+        ;;
+esac
