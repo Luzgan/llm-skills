@@ -24,3 +24,5 @@ jobs:
               cd ~/llm-skills
               git pull origin main
             fi
+            ~/llm-skills/llm-skills install --global openbrain-memory
+            ~/llm-skills/llm-skills install --global lifemanager-projects
