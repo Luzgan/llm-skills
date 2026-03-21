@@ -2,7 +2,7 @@
 name: nightly-sync
 description: Fetch recent GitHub commits and update LifeManager project descriptions and OpenBrain with development activity. Designed to run via /loop for periodic syncing.
 user-invocable: true
-allowed-tools: Bash, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__update_project, mcp__claude_ai_OpenBrain__save_thought, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_tags
+allowed-tools: Bash, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__update_project, mcp__claude_ai_LifeManager__list_tasks, mcp__claude_ai_LifeManager__get_task, mcp__claude_ai_LifeManager__update_task, mcp__claude_ai_LifeManager__get_daily_plan, mcp__claude_ai_OpenBrain__save_thought, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_tags
 ---
 
 # Nightly Project Sync
@@ -33,6 +33,10 @@ gh api repos/Luzgan/{REPO_NAME}/commits --jq '[.[] | select(.commit.author.date 
 
 Where `{SINCE_DATE}` is 3 days ago in ISO format (e.g., `2026-03-18T00:00:00Z`).
 
+## Step 1.5: Read Today's Daily Plan
+
+Call `get_daily_plan` for today's date to understand what was planned. Use this as additional context when writing the OpenBrain development log — note which planned items were worked on based on the commits.
+
 ## Step 2: Update LifeManager Projects
 
 1. Call `list_projects` to get all current projects
@@ -46,6 +50,11 @@ Where `{SINCE_DATE}` is 3 days ago in ISO format (e.g., `2026-03-18T00:00:00Z`).
 - Don't overwrite good existing descriptions with less information
 - Don't update for trivial changes (typos, minor refactors)
 - Keep descriptions concise — this is an overview, not a changelog
+
+### Task updates
+5. For each matched project, also list its tasks
+6. If a commit clearly completes or progresses a task, update the task status accordingly
+7. Only update tasks when commit messages make the connection obvious — don't guess
 
 ## Step 3: Save Development Log to OpenBrain
 
