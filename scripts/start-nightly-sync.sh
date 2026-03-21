@@ -41,6 +41,8 @@ ALLOWED_TOOLS=(
     "mcp__claude_ai_OpenBrain__save_thought"
     "mcp__claude_ai_OpenBrain__search_thoughts"
     "mcp__claude_ai_OpenBrain__list_tags"
+    "mcp__claude_ai_OpenBrain__list_projects"
+    "mcp__claude_ai_OpenBrain__link_thoughts"
 )
 
 # Start Claude Code interactively inside screen with only allowed tools
