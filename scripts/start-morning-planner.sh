@@ -7,7 +7,7 @@ set -euo pipefail
 # Requires: claude (Claude Code CLI), screen
 
 SESSION_NAME="morning-planner"
-LOOP_INTERVAL="24h"
+LOOP_INTERVAL="3h"
 
 # Ensure required commands exist
 for cmd in claude screen; do

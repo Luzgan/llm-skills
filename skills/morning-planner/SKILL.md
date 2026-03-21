@@ -9,6 +9,10 @@ allowed-tools: mcp__claude_ai_LifeManager__get_daily_plan, mcp__claude_ai_LifeMa
 
 Generate today's daily plan using context from LifeManager.
 
+## Step 0: Time check
+
+This skill is designed to run in the morning. Check the current UTC time — only proceed if it's between **05:00 and 09:00 UTC**. If outside this window, respond with "Skipping — not morning yet" and stop immediately. Do not call any MCP tools.
+
 ## Step 1: Check if plan already exists
 
 1. Call `get_daily_plan` for today's date
