@@ -9,6 +9,10 @@ allowed-tools: Bash, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_L
 
 Sync recent GitHub activity into LifeManager and OpenBrain.
 
+## Step 0: Time check
+
+This skill is designed to run at night. Check the current UTC time — only proceed if it's between **20:00 and 23:59 UTC**. If outside this window, respond with "Skipping — not evening yet" and stop immediately. Do not call any MCP tools.
+
 ## Step 1: Gather Recent Commits
 
 Run this Bash command to get commits from the last 3 days across all GitHub repos:
