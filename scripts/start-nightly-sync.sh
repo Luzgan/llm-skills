@@ -26,8 +26,22 @@ fi
 
 echo "Starting $SESSION_NAME screen session (loop every $LOOP_INTERVAL)..."
 
-# Start Claude Code interactively inside screen
-screen -dmS "$SESSION_NAME" "$(command -v claude)" --dangerously-skip-permissions
+# Allowed tools — only what the nightly-sync skill needs
+ALLOWED_TOOLS=(
+    "Bash(gh:*)"
+    "Bash(python3:*)"
+    "Skill"
+    "mcp__claude_ai_LifeManager__list_projects"
+    "mcp__claude_ai_LifeManager__get_project"
+    "mcp__claude_ai_LifeManager__update_project"
+    "mcp__claude_ai_OpenBrain__save_thought"
+    "mcp__claude_ai_OpenBrain__search_thoughts"
+    "mcp__claude_ai_OpenBrain__list_tags"
+)
+
+# Start Claude Code interactively inside screen with only allowed tools
+screen -dmS "$SESSION_NAME" "$(command -v claude)" \
+    --allowed-tools "${ALLOWED_TOOLS[@]}"
 
 # Wait for Claude to initialize
 sleep 10
