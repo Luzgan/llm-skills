@@ -29,9 +29,11 @@ jobs:
             ~/llm-skills/llm-skills install --global workflow
             ~/llm-skills/llm-skills install --global git-gh
             ~/llm-skills/llm-skills install --global nightly-sync
+            ~/llm-skills/llm-skills install --global morning-planner
 
-            # Set up nightly-sync service
+            # Set up scheduled services
             sudo cp ~/llm-skills/scripts/nightly-sync.service /etc/systemd/system/nightly-sync.service
+            sudo cp ~/llm-skills/scripts/morning-planner.service /etc/systemd/system/morning-planner.service
             sudo systemctl daemon-reload
-            sudo systemctl enable nightly-sync
-            sudo systemctl restart nightly-sync
+            sudo systemctl enable nightly-sync morning-planner
+            sudo systemctl restart nightly-sync morning-planner

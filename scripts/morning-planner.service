@@ -1,0 +1,15 @@
+[Unit]
+Description=Claude Code morning planner loop
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+ExecStart=/bin/bash /home/ec2-user/llm-skills/scripts/start-morning-planner.sh
+ExecStop=/usr/bin/screen -S morning-planner -X quit
+RemainAfterExit=yes
+Restart=on-failure
+RestartSec=300
+
+[Install]
+WantedBy=multi-user.target
