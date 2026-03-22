@@ -5,6 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=forking
+User=ec2-user
+Environment=HOME=/home/ec2-user
+Environment=PATH=/home/ec2-user/.local/bin:/home/ec2-user/.nvm/versions/node/current/bin:/usr/local/bin:/usr/bin:/bin
+WorkingDirectory=/home/ec2-user
 ExecStart=/bin/bash /home/ec2-user/llm-skills/scripts/start-morning-planner.sh
 ExecStop=/usr/bin/screen -S morning-planner -X quit
 RemainAfterExit=yes
