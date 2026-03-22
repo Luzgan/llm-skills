@@ -42,8 +42,11 @@ ALLOWED_TOOLS=(
     "mcp__claude_ai_LifeManager__list_todos"
 )
 
-# Start Claude Code interactively inside screen with only allowed tools
+# Start Claude Code interactively inside screen
+# --dangerously-skip-permissions: skips the workspace trust dialog (required for unattended use)
+# --allowed-tools: restricts which tools are actually available (independent of permission bypass)
 screen -dmS "$SESSION_NAME" "$(command -v claude)" \
+    --dangerously-skip-permissions \
     --allowed-tools "${ALLOWED_TOOLS[@]}"
 
 # Wait for Claude to initialize
