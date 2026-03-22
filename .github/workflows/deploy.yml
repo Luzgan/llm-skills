@@ -31,9 +31,16 @@ jobs:
             ~/llm-skills/llm-skills install --global nightly-sync
             ~/llm-skills/llm-skills install --global morning-planner
 
-            # Set up scheduled services
+            # Stop old screen-based services if they exist
+            sudo systemctl stop nightly-sync morning-planner 2>/dev/null || true
+            screen -S nightly-sync -X quit 2>/dev/null || true
+            screen -S morning-planner -X quit 2>/dev/null || true
+
+            # Set up systemd timers (oneshot services + timers)
             sudo cp ~/llm-skills/scripts/nightly-sync.service /etc/systemd/system/nightly-sync.service
+            sudo cp ~/llm-skills/scripts/nightly-sync.timer /etc/systemd/system/nightly-sync.timer
             sudo cp ~/llm-skills/scripts/morning-planner.service /etc/systemd/system/morning-planner.service
+            sudo cp ~/llm-skills/scripts/morning-planner.timer /etc/systemd/system/morning-planner.timer
             sudo systemctl daemon-reload
-            sudo systemctl enable nightly-sync morning-planner
-            sudo systemctl restart nightly-sync morning-planner
+            sudo systemctl enable nightly-sync.timer morning-planner.timer
+            sudo systemctl start nightly-sync.timer morning-planner.timer

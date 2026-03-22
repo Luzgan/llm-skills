@@ -1,19 +1,11 @@
 [Unit]
-Description=Claude Code morning planner loop
-After=network-online.target
-Wants=network-online.target
+Description=Claude Code morning planner
 
 [Service]
-Type=forking
+Type=oneshot
 User=ec2-user
 Environment=HOME=/home/ec2-user
 Environment=PATH=/home/ec2-user/.local/bin:/home/ec2-user/.nvm/versions/node/current/bin:/usr/local/bin:/usr/bin:/bin
 WorkingDirectory=/home/ec2-user
-ExecStart=/bin/bash /home/ec2-user/llm-skills/scripts/start-morning-planner.sh
-ExecStop=/usr/bin/screen -S morning-planner -X quit
-RemainAfterExit=yes
-Restart=on-failure
-RestartSec=300
-
-[Install]
-WantedBy=multi-user.target
+ExecStart=/bin/bash /home/ec2-user/llm-skills/scripts/run-morning-planner.sh
+TimeoutStartSec=600

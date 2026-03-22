@@ -2,7 +2,7 @@
 name: morning-planner
 description: Generate today's daily plan by gathering context from LifeManager (projects, todos, calendar, yesterday's plan) and creating a focused schedule. Designed to run via /loop for daily planning.
 user-invocable: true
-allowed-tools: mcp__claude_ai_LifeManager__get_daily_plan, mcp__claude_ai_LifeManager__update_daily_plan, mcp__claude_ai_LifeManager__add_plan_item, mcp__claude_ai_LifeManager__add_schedule_slot, mcp__claude_ai_LifeManager__remove_plan_item, mcp__claude_ai_LifeManager__remove_schedule_slot, mcp__claude_ai_LifeManager__sync_calendar_events, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__list_tasks, mcp__claude_ai_LifeManager__list_todos
+allowed-tools: mcp__life-manager__get_daily_plan, mcp__life-manager__update_daily_plan, mcp__life-manager__add_plan_item, mcp__life-manager__add_schedule_slot, mcp__life-manager__remove_plan_item, mcp__life-manager__remove_schedule_slot, mcp__life-manager__sync_calendar_events, mcp__life-manager__list_projects, mcp__life-manager__get_project, mcp__life-manager__list_tasks, mcp__life-manager__list_todos
 ---
 
 # Morning Planner
