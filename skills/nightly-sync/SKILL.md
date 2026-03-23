@@ -2,7 +2,7 @@
 name: nightly-sync
 description: Fetch recent GitHub commits and update LifeManager project descriptions and OpenBrain with development activity. Designed to run via /loop for periodic syncing.
 user-invocable: true
-allowed-tools: Bash, mcp__claude_ai_LifeManager__list_projects, mcp__claude_ai_LifeManager__get_project, mcp__claude_ai_LifeManager__update_project, mcp__claude_ai_LifeManager__list_tasks, mcp__claude_ai_LifeManager__get_task, mcp__claude_ai_LifeManager__update_task, mcp__claude_ai_LifeManager__get_daily_plan, mcp__claude_ai_OpenBrain__save_thought, mcp__claude_ai_OpenBrain__search_thoughts, mcp__claude_ai_OpenBrain__list_tags, mcp__claude_ai_OpenBrain__list_projects, mcp__claude_ai_OpenBrain__link_thoughts
+allowed-tools: Bash, mcp__life-manager__list_projects, mcp__life-manager__get_project, mcp__life-manager__update_project, mcp__life-manager__list_tasks, mcp__life-manager__get_task, mcp__life-manager__update_task, mcp__life-manager__get_daily_plan, mcp__openbrain__save_thought, mcp__openbrain__search_thoughts, mcp__openbrain__list_tags, mcp__openbrain__list_projects, mcp__openbrain__link_thoughts
 ---
 
 # Nightly Project Sync

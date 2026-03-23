@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "life-manager": {
+      "type": "stdio",
+      "command": "/home/ec2-user/life_manager/.venv/bin/python",
+      "args": ["/home/ec2-user/life_manager/mcp_server.py"]
+    },
+    "openbrain": {
+      "type": "stdio",
+      "command": "/home/ec2-user/openbrain/.venv/bin/python",
+      "args": ["/home/ec2-user/openbrain/mcp_server.py"],
+      "env": {
+        "TRANSPORT": "stdio"
+      }
+    }
+  }
+}
